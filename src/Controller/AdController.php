@@ -44,15 +44,19 @@ class AdController extends AbstractController
 
         $form->handleRequest($request);
 
-        $this->addFlash(
-            'success',
-            "L'annonce <strong>{$ad->getTitle()}</strong> a bien été enregistrée"
-        );
-
             if($form->isSubmitted() && $form->isValid()){
+                foreach($ad->getImages() as $image){
+                    $image->setAd($ad);
+                    $manager->persist($image);
+                }
 
                 $manager->persist($ad);
                 $manager->flush();
+
+                $this->addFlash(
+                    'success',
+                    "L'annonce <strong>{$ad->getTitle()}</strong> a bien été enregistrée"
+                );
 
                 return $this->redirectToRoute('ads_show', [
                     'slug' => $ad->getSlug()
@@ -62,6 +66,46 @@ class AdController extends AbstractController
 
         return $this->render('ad/new.html.twig', [
             'form' => $form->createView()
+        ]);
+
+    }
+
+
+    /**
+     * Permet d'afficher le formulaire d'edition
+     *
+     * @Route("/ads/{slug}/edit", name="ads_edit")
+     * 
+     * @return Response
+     */
+    public function edit(Ad $ad, Request $request, ObjectManager $manager){
+        $form = $this->createForm(AnnonceType::class, $ad);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            foreach($ad->getImages() as $image){
+                $image->setAd($ad);
+                $manager->persist($image);
+            }
+
+            $manager->persist($ad);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Les modifications de l'annonce <strong>{$ad->getTitle()}</strong> a bien été enregistrée"
+            );
+
+            return $this->redirectToRoute('ads_show', [
+                'slug' => $ad->getSlug()
+            ]);
+
+        }
+
+        return $this->render('ad/edit.html.twig',[
+            'form' => $form->createView(),
+            'ad' => $ad
         ]);
 
     }
