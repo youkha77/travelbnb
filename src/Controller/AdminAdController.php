@@ -69,7 +69,7 @@ class AdminAdController extends AbstractController
         if(count($ad->getBookings()) >0){
             $this->addFlash(
                 'warning',
-                "vous ne pouvez pas supprimer l'annonce <strong>{$ad->getTitle()}</strong> car elle possè déjà des réservations !"
+                "vous ne pouvez pas supprimer l'annonce <strong>{$ad->getTitle()}</strong> car elle possède déjà des réservations !"
             );
         } else {
             $manager->remove($ad);
