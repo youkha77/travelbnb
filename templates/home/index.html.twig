@@ -3,49 +3,63 @@
 {% block title %}Bienvenue!{% endblock %}
 
 {% block body %}
+
+    <img src="img/neonbrand.jpg" class="neonbrand" alt="neon brand">    
     
-<div class="container">    
-    <div class="jumbotron mt-3">
-        <h1 class="display-3">Bienvenue sur TravelBNB</h1>
-        <p class="lead">nous mettons en relations les voyageurs et propriétaire qui veulent profiter d'opportunité et gagner de l'argent en proposant leur bien a la location.</p>
-        <hr class="my-4">
-        <p>Vous etes voyageurs ? Et vous voulez voir ou vous pouvez loger pour votre prochain deplacement?</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Voir nos annonces</a>
-        </p>
-     </div>
-
-    
-    <h2 class="h1 my-5">Nos appartements stars</h2>
-
-    <div class="row">
-        {% for data in ads %}
-            {% include 'ad/_ad.html.twig' with {'ad': data.annonce} %}
-        {% endfor %}
-    </div>
-
-    <h2 class="h1 my-5">Nos propriétaires stars </h2>
-
-    <div class="row">
-        {% for data in users %}
-        <div class="col">
-            <div class="card border-secondary mb-3">
-                <div class="card-body">
-                    <h4 class="card-title">{{data.user.fullName}}</h4>
+    <div class="jumbotron container"> 
+        <div class="contenu_accueil">
+           
+                <div class="col-3">
+                    <img src="img/logotravelbnb.png" class="logoprincipale" alt="logo du site">
                     
-                    <hr>
-
-                    <div class="card-text">
-                        <img src="{{data.user.picture}}" alt="avatar de {{data.user.fullName}}" class="float-left mr-3">
-                        <p>{{data.user.introduction}}</p>
-                        <a href="{{ path('user_show',{'slug': data.user.slug})}}" class="btn btn-success float-right">En savoir plus</a>
-                    </div>
+                </div>
+                <div class="col-9">
+                    <h1 class="display-3">Bienvenue sur TravelBNB</h1>
+                    <p class="lead">Nous mettons en relations les voyageurs et propriétaires qui veulent profiter d'opportunité et gagner de l'argent en proposant leur bien a la location.</p>
+                
+            
+                    <hr class="my-4">
+                    <p>Vous etes voyageurs ? Et vous voulez voir ou vous pouvez loger pour votre prochain deplacement?</p>
+                    <p>Vous etes en déplacement professionel ? Et vous souhaitez voir ou vous pouvez loger?</p>
+                    <p class="lead">
+                        <a class="btn btn-primary btn-lg" href="{{ path('ads_index')}}" role="button">Voir nos annonces</a>
+                    </p>
+              
                 </div>
             </div>
         </div>
-        {% endfor %}
+
+     <div class="container">
+        <h2 class="h1 my-5">Nos top appartements</h2>
+
+        <div class="row">
+            {% for data in ads %}
+                {% include 'ad/_ad.html.twig' with {'ad': data.annonce} %}
+            {% endfor %}
+        </div>
+
+        <h2 class="h1 my-5">Nos top propriétaires</h2>
+
+        <div class="row">
+            {% for data in users %}
+            <div class="col">
+                <div class="card border-secondary mb-3">
+                    <div class="card-body">
+                        <h4 class="card-title">{{data.user.fullName}}</h4>
+                        
+                        <hr>
+
+                        <div class="card-text">
+                            <img src="{{data.user.picture}}" alt="avatar de {{data.user.fullName}}" class="float-left mr-3">
+                            <p>{{data.user.introduction}}</p>
+                            <a href="{{ path('user_show',{'slug': data.user.slug})}}" class="btn btn-success float-right">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-</div>
 
 
 {% endblock %}
