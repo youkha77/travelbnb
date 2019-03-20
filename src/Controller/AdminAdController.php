@@ -33,7 +33,7 @@ class AdminAdController extends AbstractController
      * @Route("/admin/ads/{id}/edit", name="admin_ads_edit")
      *
      * @param Ad $ad
-     * @return void
+     * @return Response
      */
     public function edit(Ad $ad, Request $request, ObjectManager $manager){
         $form = $this->createForm(AnnonceType::class, $ad);
