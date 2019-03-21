@@ -28,7 +28,7 @@ class AdminAdController extends AbstractController
     }
 
     /**
-     * Permet d'afficher le formulaire d'edition
+     * Permet d'afficher le formulaire d'édition
      * 
      * @Route("/admin/ads/{id}/edit", name="admin_ads_edit")
      *
@@ -57,7 +57,7 @@ class AdminAdController extends AbstractController
     }
 
     /**
-     * Permet de supprimner une annonce
+     * Permet de supprimer une annonce
      * 
      * @Route("/admin/ads/{id}/delete", name="admin_ads_delete")
      *
